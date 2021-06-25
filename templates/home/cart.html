@@ -1,0 +1,395 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock title %}
+{% block breadcrumb %}Shoping Bag{% endblock breadcrumb %}
+
+{% block content %}
+
+<section class="w3l-ecommerce-main-inn">
+  <h3 class="hny-title text-center">My shopping bag</h3>
+</section>
+
+<div class="outer-container">
+  <div class="container px-2 mt-3">
+    <div class="cart-page__container">
+      <div class="cart-page__mobile-checkout">
+        <div class="cart-level__subtotal">
+          <div class="cart-level__subtotal-heading">
+            <div>
+              <span class="">Subtotal</span>
+              <span class="checkout-subtotal__item-count">
+                <span>4</span> items</span>
+            </div>
+          </div>
+          <div class="cart-level__subtotal-info">
+            <span class="checkout-subtotal__total"><span class="money">$157.96 USD</span></span>
+          </div>
+        </div>
+
+        <input type="submit" name="checkout" class="cart__submit" value="Checkout" />
+      </div>
+
+      <div class="cart-page__content">
+        <table class="cart-content__table">
+          <thead class="cart-content__table-header">
+            <tr>
+              <th class="table-header__info">Item</th>
+              <th class="table-header__quantity">Quantity</th>
+              <th class="table-header__price">Price</th>
+            </tr>
+          </thead>
+          <tbody  id="cart-items-wrapp">
+
+
+            <div id="cart-spin" style="width: 100%; margin: 20px 0px 100px 0px" class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+
+          </tbody>
+        </table>
+
+        <div  class="cart-content__share">
+          <span class="cart-content__share-button">Share bag</span>
+                   
+        </div>
+      </div>
+
+      <div class="cart-page__summary">
+
+        <div style="display: flex;
+        flex-direction: column;
+    "  class="cart-page__discounts">
+          
+        <div class="gift">
+          <input type="checkbox" id="gift" name="product-${product.id}-gift-checkbox" value="order_gift" />
+          <label for="gift"> This order is a gift</label>
+          <p>Prices will not be shown on packing slip</p>
+        </div>
+
+        <div class="form-group">
+          <!-- <label for="exampleFormControlTextarea3">Rounded corners</label> -->
+          <textarea style="    font-size: 14px;
+          height: 100px;
+      " class="form-control" id="exampleFormControlTextarea3" placeholder="Your Gift Description"  rows="7"></textarea>
+          
+        </div>
+        </div>
+
+        <div class="cart-page__discounts">
+          <input type="hidden" id="cart-page__discount-value" name="discount" />
+          <input type="text" class="cart-page__discounts__input" placeholder=" " id="ispbxii_2" />
+          <label class="cart-page__discounts__label">Discount code</label>
+          <button type="button" class="cart-page__discounts__apply">
+            <span>Apply</span>
+          </button>
+        </div>
+
+        <div class="cart-page__checkout">
+          <div class="cart-level__subtotal">
+            <div class="cart-level__subtotal-heading">
+              <div>
+                <span>Subtotal</span>
+                <span class="checkout-subtotal__item-count">
+                  (<span id="total-cart-items" data-cart-item-count=""></span> items)</span>
+              </div>
+            </div>
+            <div class="cart-level__subtotal-info">
+              <span class="checkout-subtotal__pre-discount hide" data-cart-pre-discount=""></span>
+              <span class="checkout-subtotal__total" data-cart-subtotal=""><span id="total-price"  class="money"> </span></span>
+            </div>
+          </div>
+
+          <input type="submit" name="checkout" class="cart__submit" value="Checkout" />
+          <div class="cart-page__separator"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+
+{% block js %}
+
+{% if user.is_authenticated %}
+  <script>
+
+    // const data = {cartIds: localStorage.getItem('cart')}
+
+    fetch("http://127.0.0.1:8000/api/cart/", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        products = data;
+        console.log(products);
+        let cartProducts = ''
+        let cartProductRealPrice = 0
+        let cartProductDisPrice = 0
+        products.map((product) => {
+          console.log(product);
+          cartProductDisPrice += parseInt(product.discount_price)
+          cartProductRealPrice += parseInt(product.price)
+          cartProducts += `
+
+
+          <tr class="cart-content__item item  " id="${product.id}-remove-cart-item">
+                <td class="line-item__info">
+                  <a class="line-item__product-image"
+                    href="/products/written-with-love-sweatshirt-purple-combo?variant=12204398084220">
+                    <img class="cart__image"
+                      src="${
+                        product.image != ''? '/media/' + product.image:
+                        product.image_url
+                      }" />
+                  </a>
+
+                  <h6 class="product-vendor"><a href="">${product.brand}</a></h6>
+                  <a class="product-title" href="">${product.product_name}</a>
+
+                  <ul>
+                    ${
+                      product.size != ''?
+                      '<li>Color:' + product.size + '</li>': ''
+                    }
+                    ${
+                      product.color != ''?
+                      '<li>Color:' + product.color + '</li>':''
+                    }
+                  
+                  
+                  </ul>
+
+
+                  <!-- <div class="line-item__edit">
+                                      <span >
+                  Edit
+                </span> -->
+
+                  
+                </td>
+
+                <td class="line-item__quantity">
+                  <div>
+                    <label class="line-item__quantity-label">Quantity</label>
+                    <input class="line-item__quantity-input" type="number" value="2" min="0" pattern="[0-9]*"
+                      name="updates[]" />
+                  </div>
+                </td>
+
+                <td class="line-item__price">
+                  <div class="grid-item__price">
+                    <div>
+                      <dl class="line-item__price-list final-sale--cart">
+                        <div>
+                          <dd class="line-item__price-list-definition">
+                            <div class="price">
+                              ${
+                                  product.discount_price == '0'? product.price + ' BDT': (product.price-product.discount_price) +  ' BDT <br>' + '<s>' + product.price + ' BDT</s>' 
+
+                              }
+                              <span></span>
+                            </div>
+                          </dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+
+                  
+                  
+                  
+                  
+                  <div class="line-item__adjustments">
+                    <p>
+                      Delivery: ${product.delivery_cost} <br />
+                      Ready to ship in 1–2 weeks from Australia
+                    </p>
+                    <a onclick="removeFromCart(this, ${product.id})" class="line-item__remove"  aria-label="Remove Product name - S">Remove</a>
+                    |
+                    <span onclick="addToWishlist(this, ${product.id})" class="line-item__save">Move to favorites</span>
+                  </div>
+
+                  <div class="line-item__quantity-mobile">
+                    <div>
+                      <label class="line-item__quantity-label">QTY</label>
+                      <input class="line-item__quantity-input" type="number" value="2" min="0" pattern="[0-9]*" />
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            
+
+          `
+
+        });
+        cartProducts += `
+
+
+        `
+        // document.getElementById("cart-items-wrapp").innerHTML = product.length;
+        // document.getElementById("wishlist-count-number").innerHTML = product.length;
+        document.getElementById('cart-spin').remove()
+        document.getElementById('cart-items-wrapp').innerHTML = cartProducts;
+        document.getElementById('total-price').innerHTML = cartProductRealPrice - cartProductDisPrice + ' BDT';
+        document.getElementById('total-cart-items').innerHTML = products.length;
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+
+  </script>
+
+
+  {% else %}
+
+  <script>
+  
+   const data = { cartIds: localStorage.getItem("cart") };
+  console.log(data);
+
+  fetch("http://127.0.0.1:8000/api/cart-loggedout/", {
+    method: "POST", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+        products = JSON.parse(data.cartItems);
+        console.log(products);
+        let cartProducts = ''
+        let cartProductRealPrice = 0
+        let cartProductDisPrice = 0
+        products.map((product) => {
+          console.log(product);
+          cartProductDisPrice += parseInt(product.discount_price)
+          cartProductRealPrice += parseInt(product.price)
+          cartProducts += `
+
+
+
+          <tr class="cart-content__item item  " id="${product.id}-remove-cart-item">
+                <td class="line-item__info">
+                  <a class="line-item__product-image"
+                    href="/products/written-with-love-sweatshirt-purple-combo?variant=12204398084220">
+                    <img class="cart__image"
+                      src="${
+                        product.image != ''? '/media/' + product.image:
+                        product.image_url
+                      }" />
+                  </a>
+
+                  <h6 class="product-vendor"><a href="">${product.brand}</a></h6>
+                  <a class="product-title" href="">${product.product_name}</a>
+
+                  <ul>
+                    ${
+                      product.size != ''?
+                      '<li>Color:' + product.size + '</li>': ''
+                    }
+                    ${
+                      product.color != ''?
+                      '<li>Color:' + product.color + '</li>':''
+                    }
+                  
+                  
+                  </ul>
+
+
+                  <!-- <div class="line-item__edit">
+                                      <span >
+                  Edit
+                </span> -->
+
+                  
+                </td>
+
+                <td class="line-item__quantity">
+                  <div>
+                    <label class="line-item__quantity-label">Quantity</label>
+                    <input class="line-item__quantity-input" type="number" value="2" min="0" pattern="[0-9]*"
+                      name="updates[]" />
+                  </div>
+                </td>
+
+                <td class="line-item__price">
+                  <div class="grid-item__price">
+                    <div>
+                      <dl class="line-item__price-list final-sale--cart">
+                        <div>
+                          <dd class="line-item__price-list-definition">
+                            <div class="price">
+                              ${
+                                  product.discount_price == '0'? product.price + ' BDT': (product.price-product.discount_price) +  ' BDT <br>' + '<s>' + product.price + ' BDT</s>' 
+
+                              }
+                              <span></span>
+                            </div>
+                          </dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+
+                  
+                  
+                  
+                  
+                  <div class="line-item__adjustments">
+                    <p>
+                      Delivery: ${product.delivery_cost} <br />
+                      Ready to ship in 1–2 weeks from Australia
+                    </p>
+                    <a onclick="toggleInLocalCart(this, ${product.id})" class="line-item__remove"  aria-label="Remove Product name - S">Remove</a>
+                    |
+                    <span onclick="toggleInLocalWishlist(this, ${product.id})" class="line-item__save">
+                      ${
+                        JSON.parse(localStorage.getItem('favorites')).includes(product.id) ? 'Remove From  Wishlist': 'Move To Wishlist'
+                      }
+                      
+                    </span>
+                  </div>
+
+                  <div class="line-item__quantity-mobile">
+                    <div>
+                      <label class="line-item__quantity-label">QTY</label>
+                      <input class="line-item__quantity-input" type="number" value="2" min="0" pattern="[0-9]*" />
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            
+
+          `
+
+        });
+        
+
+        // document.getElementById("cart-items-wrapp").innerHTML = product.length;
+        // document.getElementById("wishlist-count-number").innerHTML = product.length;
+        document.getElementById('cart-spin').remove()
+        document.getElementById('cart-items-wrapp').innerHTML = cartProducts;
+        document.getElementById('total-price').innerHTML = cartProductRealPrice - cartProductDisPrice + ' BDT';
+        document.getElementById('total-cart-items').innerHTML = products.length;
+      })
+    
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+  
+  </script>
+  
+{% endif %}
+
+
+
+{% endblock js %}

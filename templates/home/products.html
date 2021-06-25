@@ -1,0 +1,179 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %} {{ query}} results {% endblock title %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+
+{% block theme %} <link href="{% static 'assets/css/theme.css' %}" rel="stylesheet" /> {% endblock theme %}
+
+{% block breadcrumb %} {{query}}{% endblock breadcrumb %}
+{% block head %}
+<script type="text/javascript" src="{% static 'js/product-filter.js' %}"></script> {% endblock head %}
+{% block css %}
+
+<style>
+  @media only screen and (max-width: 500px) {
+    header {
+      height: auto;
+    }
+  }
+</style>
+
+{% endblock css %} {% block content %}
+
+<div class="search-results-page mt-3">
+  <h1 class="search-results-page__title mb-2">
+    Search Results for "<span>{{ query }}</span>"
+  </h1>
+  <div class="collection-layout">
+    {% include 'home/filters.html' %}
+    <button type="button" class="collection-layout__close-filters-backdrop">
+      <span>Close Filters</span>
+    </button>
+    <div class="collection-layout__products">
+      <div class="collection-layout__controls-wrapper" data-sticky-wrapper="collection-filter-controls"
+        style="height: auto">
+        <div class="collection-layout__controls" data-sticky="collection-filter-controls">
+          <div class="collection-layout__result-count">
+            <span data-paginate-total="">2218</span> results
+          </div>
+          <button type="button" id="feature_button" class="collection-layout__show-filters">
+            <span>Filter <span data-filter-count="">0</span></span>
+          </button>
+          <select class="collection-layout__sort-order">
+            <option value="products">Featured</option>
+            <option value="products_recently_ordered_count_desc">
+              Bestsellers
+            </option>
+            <option value="products_published_at_desc">Newest Arrivals</option>
+            <option value="products_price_desc">Price: High to Low</option>
+            <option value="products_price_asc">Price: Low to High</option>
+          </select>
+        </div>
+      </div>
+      <div class="collection-layout__active-filters" hidden=""></div>
+      <div class="collection-layout__mobile-result-count">
+        <span data-paginate-total="">2218</span> results
+      </div>
+      <div class="collection-list" id="filteredProducts">
+        <p class="ajaxLoader"> Loading.... </p>
+        <div class="collection-list__page">
+          {% for p in data %}
+          <div class="collection-list__product-tile">
+            <div class="product-tile product-tile--placeholder">
+              <form class="product-tile__form" action="/cart/add">
+                <div class="product-tile__image-line">
+                  <div class="product-tile__badges">
+                    <span class="product-tile__badge"></span>
+                  </div>
+                  <button type="button" class="product-tile__wishlist" title="Add to wishlist">
+                    <svg width="44" height="44" viewBox="0 0 44 44" title="Heart" fill="none" stroke-linecap="round"
+                      stroke-linejoin="round" aria-hidden="true" focusable="false" role="presentation">
+                      <path
+                        d="M22 31.68l-8.85-9.23a5.24 5.24 0 0 1-1-6 5.24 5.24 0 0 1 8.41-1.37L22 16.5l1.44-1.42a5.24 5.24 0 0 1 8.38 1.36 5.24 5.24 0 0 1-1 6L22 31.68z">
+                      </path>
+                    </svg>
+                  </button>
+                  {% for p in images %}
+                      <a class="product-tile__image-link" href="">
+                          {% if p.image %}
+                        <img loading="lazy" class="product-tile__image product-tile__image--primary"
+                            alt="{{p.alt_text}}"
+                            src="/products_images/{{p.image}" />
+                          {% elif p.image_url %}
+                        <img loading="lazy" class="product-tile__image product-tile__image--primary"
+                            alt="{{p.alt_text}}" src="{{p.image_url}}">
+                          {% endif %}
+
+                            {% if p.image %}
+                        <img loading="lazy" class="product-tile__image product-tile__image--alternate"
+                            alt="{{p.alt_text}}"
+                            src="/products_images/{{p.image}" />
+                          {% elif p.image_url %}
+                        <img loading="lazy" class="product-tile__image product-tile__image--alternate"
+                            alt="{{p.alt_text}}" src="{{p.image_url}}">
+                          {% endif %}
+                      </a>
+                  {% endfor %}
+                  <!-- <a class="product-tile__image-link">
+                    <img loading="lazy" class="product-tile__image product-tile__image--primary"
+                      alt="Image of Buckle Up Sis Skinny Jeans - Black"
+                      src="https://cdn.shopify.com/s/files/1/0293/9277/products/10-07-19_Studio_3_JP_RE_11-59-24_19__VID9250_Mocha_0993_JK_760x.jpg?v=1572888051" />
+                  </a>
+                  <a class="product-tile__image-link" href="">
+                    <img loading="lazy" class="product-tile__image product-tile__image--alternate"
+                      alt="Image of Buckle Up Sis Skinny Jeans - Black"
+                      src="//cdn.shopify.com/s/files/1/0293/9277/products/11-11-19_Studio_3_RM_RE_PR_11-38-31_20__N17057_WhiteBlack_0693_NT_8363c1fe-ab0b-43f3-93ac-74024e938a65_360x.jpg?v=1597089628" />
+                  </a> -->
+                  <button type="button" class="
+                      product-tile__toggle-alternate-image
+                      product-tile__toggle-alternate-image--left
+                    ">
+                    <svg width="44" height="44" fill="none" stroke="#000" stroke-width="1.5">
+                      <path d="M22 14l-8 8 8 8"></path>
+                    </svg>
+                    <span>Toggle Alternate Image Visibility</span>
+                  </button>
+                  <button type="button" class="
+                      product-tile__toggle-alternate-image
+                      product-tile__toggle-alternate-image--right
+                    ">
+                    <svg width="44" height="44" fill="none" stroke="#000" stroke-width="1.5">
+                      <path d="M22 14l8 8-8 8"></path>
+                    </svg>
+                    <span>Toggle Alternate Image Visibility</span>
+                  </button>
+                </div>
+                <div class="product-tile__content-line">
+                  <div class="product-tile__bottom-tag-line" style="color: #EF9797">
+                    30-70% OFF SITEWIDE! USE CODE: SAVE30
+                  </div>
+                  <div class="product-tile__product-title">
+                    <a href="/product/{{p.id}}/{{ p.slug }}"> {{p.product_name}} </a>
+                  </div>
+                  <a href="" class="brand_name"> {{p.brand}}</a>
+                  <ul class="rating">
+                    <li class="fa fa-star{% if p.averagereview < 1 %}-o empty{% endif %}"></li>
+                    <li class="fa fa-star{% if p.averagereview < 2 %}-o empty{% endif %}"></li>
+                    <li class="fa fa-star{% if p.averagereview < 3 %}-o empty{% endif %}"></li>
+                    <li class="fa fa-star{% if p.averagereview < 4 %}-o empty{% endif %}"></li>
+                    <li class="fa fa-star{% if p.averagereview < 5 %}-o empty{% endif %}"></li>
+                  </ul>
+                  <div class="product-tile__price-line">
+                    <span class="product-tile__price"><span class="money">${{p.price}}</span></span>
+                  </div>
+                  <div class="product-tile__cta-line">
+                    <button type="button" data-variant-id="12196399513724" class="product-tile__show-variants">
+                      Add To Bag
+                      <svg width="18" height="8" fill="none" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 1l4 4l4-4"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+      <!-- <div class="pagination">
+                    <div>
+                        <p class="pagination__text">Showing <span data-paginate-offset="">48</span><span data-paginate-total-fragment=""> of
+        <span data-paginate-total="">2218</span></span> styles</p>
+                        <div class="pagination__progress-bar">
+                            <span style="width: 2.16411%;"></span>
+                        </div>
+                    </div>
+                    <button type="button" id="js-paginate-next" class="button-secondary">
+                        <span>Load More</span>
+                    </button>
+                </div> -->
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

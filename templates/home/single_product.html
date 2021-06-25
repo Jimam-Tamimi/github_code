@@ -1,0 +1,566 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %} {{product.product_name}} {% endblock title %}
+{% block description %} {{ product.description }} {% endblock %}
+{% block keywords %} {{ product.keywords }} {% endblock %}
+{% block breadcrumb %} {{product.product_name}}{% endblock breadcrumb %}
+
+
+{% block css %}
+<style>
+    .transparent-dots {
+        z-index: 0;
+    }
+
+    /*-- reviews --*/
+
+    .single-review {
+        margin-bottom: 30px;
+    }
+
+    .single-review .review-heading>div {
+        display: inline-block;
+    }
+
+    .single-review .review-heading>div+div {
+        margin-left: 10px;
+    }
+
+    .single-review .review-rating {
+        display: inline-block;
+    }
+
+    .single-review .review-rating>i {
+        color: #FFB656;
+    }
+
+    .single-review .review-rating>i.empty {
+        color: #DADADA;
+    }
+
+    .single-review .review-body {
+        margin-top: 10px;
+    }
+
+    .reviews-pages li {
+        display: inline-block;
+        margin-right: 6px;
+    }
+
+    .reviews-pages li a {
+        display: block;
+        min-width: 10px;
+        text-align: center;
+    }
+
+    .reviews-pages li.active {
+        color: #F8694A;
+    }
+
+    /*-- review form --*/
+
+    .review-form textarea.input {
+        height: 90px;
+    }
+
+    .review-form .input-rating .stars {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .review-form .input-rating .stars input[type="radio"] {
+        display: none;
+    }
+
+    .review-form .input-rating .stars>label {
+        float: right;
+        cursor: pointer;
+        padding: 0px 3px;
+        margin: 0px;
+        -webkit-transition: 0.3s all;
+        transition: 0.3s all;
+    }
+
+    .review-form .input-rating .stars>label:hover,
+    .review-form .input-rating .stars>label:hover~label {
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+
+    .review-form .input-rating .stars>label:before {
+        content: "\f006";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        color: #DADADA;
+        font-size: 14px;
+        -webkit-transition: 0.3s all;
+        transition: 0.3s all;
+    }
+
+    .review-form .input-rating .stars>label:hover:before,
+    .review-form .input-rating .stars>label:hover~label:before {
+        content: "\f005";
+        color: #FFB656;
+    }
+
+    .review-form .input-rating .stars>input:checked label:before,
+    .review-form .input-rating .stars>input:checked~label:before {
+        content: "\f005";
+        color: #FFB656;
+    }
+
+    /* .product-image a img {
+        width: 100px;
+        height: 350px;
+    } */
+</style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="page-wrapper mt-1">
+    <div class="container-fluid pl-lg-0 padding-right-lg">
+        <div class="product-single-container product-single-default">
+            <div class="row">
+                <div class="col-lg-7 product-single-gallery">
+                    <div class="sticky-slider">
+                        <div class="product-slider-container">
+                            <div class="product-single-carousel owl-carousel owl-theme" id="owl-carousel">
+                                {% for p in images %}
+                                <div class="product-item">
+                                    {% if p.image %}
+                                    <img class="product-single-image" src="/products_images/{{p.image}" />
+
+                                    {% elif p.image_url %}
+                                    <img class="product-single-image" src="{{p.image_url}}">
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="prod-thumbnail owl-dots transparent-dots flex-column" id='carousel-custom-dots'>
+                            {% for p in images %}
+                            <div class="owl-dot">
+                                {% if p.image %}
+                                <img src="/products_images/{{p.image}" />
+                                {% elif p.image_url %}
+                                <img src="{{p.image_url}}">
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!-- End .col-lg-6 -->
+
+                <div class="col-lg-5" id="single-product">
+                    <div class="info">
+                        <div class="product-single-Name">
+                            <h3 class="small">{{product.brand}}</h3>
+                            <div>
+                                <h1 class="big">{{product.product_name}}</h1>
+                                <!-- <span class="new">new</span> -->
+                            </div>
+
+                        </div>
+                        <div class="review-stars">
+                            <span class="fa fa-star{% if product.averagereview < 1%}-o empty{% endif%}"></span>
+                            <span class="fa fa-star{% if product.averagereview < 2%}-o empty{% endif%}"></span>
+                            <span class="fa fa-star{% if product.averagereview < 3%}-o empty{% endif%}"></span>
+                            <span class="fa fa-star{% if product.averagereview < 4%}-o empty{% endif%}"></span>
+                            <span class="fa fa-star{% if product.averagereview < 5%}-o empty{% endif%}"></span>
+
+                            <span style="display: inline-block;">
+                                <h6 style="text-decoration: underline;">{{ product.countreview}} Reviews</h6>
+                            </span>
+                            <h6 style="text-decoration: underline;"> Rating:
+                                {{product.averagereview|stringformat:".2f"}}</h6>
+                        </div>
+                        <div class="price">
+                            <h1>${{product.price}}</h1>
+                        </div>
+                        <div class="price">
+                            <h5 style="font-size: 12px; color: #3a3a3a; font-weight: bold;"> Delivery cost:
+                                ${{product.delivery_cost}}</h5>
+                        </div>
+
+                        <div class="color-container">
+                            <h3 class="title">Color</h3>
+                            <div class="colors">
+                                <span class="color" primary="#2175f5" color="blue"></span>
+                                <span class="color" primary="#f84848" color="red"></span>
+                                <span class="color" primary="#29b864" color="green"></span>
+                                <span class="color" primary="#ff5521" color="orange"></span>
+                                <span class="color" primary="#444" color="black"></span>
+                            </div>
+                        </div>
+                        <div class="size-container">
+                            <h3 class="title">Size</h3>
+                            <div class="sizes">
+                                <span class="size">XS</span>
+                                <span class="size">S</span>
+                                <span class="size">M</span>
+                                <span class="size">L</span>
+                                <span class="size">XL</span>
+                            </div>
+                        </div>
+                        <div class="buy-price">
+                            <a href="#" class="buy">Add to bag</a>
+                            <a href="" class="fav-box" style="margin-left: 20px;"><i
+                                    class="far fa-heart favourite"></i></a>
+                        </div>
+                        <div class="buy-price mt-2">
+                            <a href="#" class="buy">Quick checkout</a>
+                        </div>
+
+
+                        <section class="accordion accordion-1">
+                            <input type="checkbox" name="collapse" id="handle1" checked="checked">
+                            <h5 class="handle">
+                                <label for="handle1">Product details</label>
+                            </h5>
+                            <div class="content">
+                                {{product.product_details | safe}}
+
+                            </div>
+                        </section>
+                        <section class="accordion">
+                            <input type="checkbox" name="collapse2" id="handle2">
+                            <h2 class="handle">
+                                <label for="handle2">Shipping information</label>
+                            </h2>
+                            <div class="content">
+                                {{product.shipping_information | safe }}
+                            </div>
+                        </section>
+                        <section class="accordion">
+                            <input type="checkbox" name="collapse2" id="handle3">
+                            <h2 class="handle">
+                                <label for="handle3">Return policy</label>
+                            </h2>
+                            <div class="content">
+                                {{product.return_policy | safe}}
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+            </div><!-- End .col-lg-6 -->
+        </div><!-- End .row -->
+    </div><!-- End .product-single-container -->
+</div>
+
+<br>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h5 class="text-uppercase py-3"> <strong> Reviews </strong> </h5>
+            <div class="product-reviews">
+                {% for rs in comments %}
+                <div class="single-review">
+                    <div class="review-heading">
+                        <div><a href="#"><i class="fa fa-user-o"></i> {{ rs.user.first_name }}</a> </div>
+                        <div><b>{{ rs.subject }}</b> </div>
+                        <div><a href="#"><i class="fa fa-clock-o"></i> {{ rs.create_at}}</a></div>
+
+                        <div class="review-rating pull-right">
+                            <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+                            <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+                            <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+                            <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+                            <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
+                        </div>
+                    </div>
+                    <div class="review-body">
+                        <p>{{ rs.comment }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <ul class="reviews-pages">
+                    <li class="active">1</li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-5 pl-4">
+            <h5 class="text-uppercase py-3"> <strong> Write Your Review</strong> </h5>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form class="review-form" action="/product/addcomment/{{ product.id }}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input name="subject" class="input" type="text" placeholder="Your subject" />
+                </div>
+                <div class="form-group">
+                    <textarea name="comment" class="input" placeholder="Your review"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="input-rating">
+                        <strong class="text-uppercase">Your Rating: </strong>
+                        <div class="stars">
+                            <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+                            <input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+                            <input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+                            <input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+                            <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
+                        </div>
+                    </div>
+                </div>
+                {% if user.id is not None %}
+                <button class="primary-btn">Submit</button>
+                {% else %}
+                You must be logged in to post a review
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="hero-image">
+    <div class="hero-text">
+        <h1 style="font-style: Georgia; color: #fff; ">Styled On Insta</h1>
+        <p>Tag us to be featured @souk.ca with #SoukQueen</p>
+        <a href="https://www.instagram.com/souk.ca/" target="_blank"><button>TAG NOW</button></a>
+    </div>
+
+
+    <!--lightbox style popup goes here-->
+</div>
+
+<!-- Women Banner Section Begin -->
+<section class="women-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="filter-control">
+                    <ul>
+                        <li class="active">More from this shop</li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Women Banner Section End -->
+
+<section class="slider">
+    <ul id="autoWidth" class="cs-hidden" style=" height: 450px;">
+        {% for p in more_from_shop %}
+        <div class="item">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#">
+                        {% if p.image %}
+                        <img width="100px" height="350px" class="pic-1" src="/products_images/{{p.image}" />
+                        {% elif p.image_url %}
+                        <img width="100px" height="350px" class="pic-1" src="{{p.image_url}}">
+                        {% endif %}
+                    </a>
+
+                    <ul class="social">
+                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="#">{{p.product_name}} </a></h3>
+                    <h3 class="title"><a href="#">{{p.brand}}</a></h3>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                    <div class="price">
+                        $100
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="women-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="filter-control">
+                    <ul>
+                        <li class="active">Top picks for you</li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slider-2">
+    <ul id="autoWidth-2" class="cs-hidden">
+        {% for p in top_picks %}
+        <div class="item">
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="/product/{{p.id}}/{{ p.slug }}">
+                        {% if p.image %}
+                        <img width="100px" height="350px" class="pic-1" src="/products_images/{{p.image}" />
+                        {% elif p.image_url %}
+                        <img width="100px" height="350px" class="pic-1" src="{{p.image_url}}">
+                        {% endif %}
+                    </a>
+
+                    <ul class="social">
+                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="/product/{{p.id}}/{{ p.slug }}">{{p.product_name}} </a></h3>
+                    <h3 class="title"><a href="/product/{{p.id}}/{{ p.slug }}">{{p.brand}}</a></h3>
+                    <ul class="rating">
+                        <li class="fa fa-star{% if p.averagereview < 1 %}-o empty{% endif %}"></li>
+                        <li class="fa fa-star{% if p.averagereview < 2 %}-o empty{% endif %}"></li>
+                        <li class="fa fa-star{% if p.averagereview < 3 %}-o empty{% endif %}"></li>
+                        <li class="fa fa-star{% if p.averagereview < 4 %}-o empty{% endif %}"></li>
+                        <li class="fa fa-star{% if p.averagereview < 5 %}-o empty{% endif %}"></li>
+                    </ul>
+                    <div class="price">
+                        ${{p.price}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="mt-5 pb-5 reviews-section">
+    <div class="container">
+        <h4 class="text-center">Reviews</h4>
+        <hr class="midline">
+        <!-- <h5 class="text-center mb-5">Our team created best opportunities for your business.</h5> -->
+        <div class="card col-md-12">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="100000">
+                <div class="w-100 carousel-inner mb-2" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="bg"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-4 align-items-start">
+                                            <img src="https://store-images.s-microsoft.com/image/apps.21420.9007199266668209.c36d24f9-5265-40a0-8535-b7ee823eaa8b.4d4ce9b9-28ba-4156-9b9b-bea7eb22c452?mode=scale&q=90&h=300&w=300"
+                                                alt="" class="rounded-circle img-fluid">
+                                        </div>
+                                        <div class="col-sm-9 col-8">
+                                            <h2>Micheal Smith</h2>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut recusandae
+                                                facilis sint,
+                                                odit reprehenderit voluptates blanditiis similique facere suscipit
+                                                porro.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-4 align-items-start">
+                                            <img src="https://store-images.s-microsoft.com/image/apps.21420.9007199266668209.c36d24f9-5265-40a0-8535-b7ee823eaa8b.4d4ce9b9-28ba-4156-9b9b-bea7eb22c452?mode=scale&q=90&h=300&w=300"
+                                                alt="" class="rounded-circle img-fluid">
+                                        </div>
+                                        <div class="col-sm-9 col-8">
+                                            <h2>Helena Doe </h2>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut recusandae
+                                                facilis sint, odit reprehenderit voluptates blanditiis similique facere
+                                                suscipit porro.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="bg"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-4 align-items-start">
+                                            <img src="https://store-images.s-microsoft.com/image/apps.21420.9007199266668209.c36d24f9-5265-40a0-8535-b7ee823eaa8b.4d4ce9b9-28ba-4156-9b9b-bea7eb22c452?mode=scale&q=90&h=300&w=300"
+                                                alt="" class="rounded-circle img-fluid">
+                                        </div>
+                                        <div class="col-sm-9 col-8">
+                                            <h2>John Doe</h2>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut recusandae
+                                                facilis sint, odit reprehenderit voluptates blanditiis similique facere
+                                                suscipit porro.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-4 align-items-start">
+                                            <img src="https://store-images.s-microsoft.com/image/apps.21420.9007199266668209.c36d24f9-5265-40a0-8535-b7ee823eaa8b.4d4ce9b9-28ba-4156-9b9b-bea7eb22c452?mode=scale&q=90&h=300&w=300"
+                                                alt="" class="rounded-circle img-fluid">
+                                        </div>
+                                        <div class="col-sm-9 col-8">
+                                            <h2>Helena Doe </h2>
+                                            <ul class="rating">
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
+                                                    recusandae facilis sint, odit reprehenderit voluptates blanditiis
+                                                    similique facere suscipit porro.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"><i
+                            class="fas fa-chevron-left"></i></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"><i
+                            class="fas fa-chevron-right"></i></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock content %}

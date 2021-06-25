@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}{% endblock title %}</title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Vision Or Motto of the site">
+    <meta name="author" content="souk-THEME">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="">
+
+    <!-- Css Styles -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'home/css/font-awesome.min.css' %} " type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" integrity="sha512-kJ30H6g4NGhWopgdseRb8wTsyllFUYIx3hiUwmGAkgA9B/JbzUBDQVr2VVlWGde6sdBVOG7oU8AL35ORDuMm8g==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/fontawesome.min.js" integrity="sha512-kI12xOdWTh/nL2vIx5Yf3z/kJSmY+nvdTXP2ARhepM/YGcmo/lmRGRttI3Da8FXLDw0Y9hRAyZ5JFO3NrCvvXA==" crossorigin="anonymous"></script>
+
+    <!-- souk CSS -->
+    <link rel="stylesheet" href="{% static 'home/assets/css/style-liberty.css' %}">
+    <link rel="stylesheet" href="{% static 'home/assets/css/style-starter.css' %} ">
+
+    <link rel="stylesheet" href="{% static 'home/css/owl.carousel.min.css' %} " type="text/css">
+    <link rel="stylesheet" href="{% static 'home/css/slicknav.min.css' %} " type="text/css">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %} " type="text/css">
+    <link rel="stylesheet" href="{% static 'home/css/cart.css' %} ">
+    <link href="{% static 'home/css/slider_item.css' %}"  rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
+
+    <!--page-icon------------>
+    <link rel="shortcut icon" href="{% static 'home/images/logo.png' %} ">
+    <link rel="stylesheet" href="{% static 'home/css/lightSlider.css' %} ">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.js" integrity="sha512-sww7U197vVXpRSffZdqfpqDU2SNoFvINLX4mXt1D6ZecxkhwcHmLj3QcL2cJ/aCxrTkUcaAa6EGmPK3Nfitygw==" crossorigin="anonymous"></script>
+
+    <script src="https://kenwheeler.github.io/slick/slick/slick.js"></script>
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static 'home/assets/css/style.min.css' %} ">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/assets/fonts/fontawesome.css' %} ">
+    <link rel="stylesheet" href="{% static 'home/css/c2.css' %} ">
+    <link rel="stylesheet" href="{% static 'home/css/extra.css' %} ">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script>
+
+    <link href="{% static 'home/menu/css/menu.css' %}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'home/menu/css/reset.css' %} ">
+    <!-- CSS reset -->
+    <link rel="stylesheet" href="{% static 'home/menu/css/style.css' %} ">
+    <!-- Resource style -->
+    <!-- <script src="menu/js/modernizr.js"></script> -->
+    <!-- Modernizr -->
+
+    {% block css %}{% endblock css %}
+    
+</head>
+
+<body>
+
+    <style>
+        header {
+            border-bottom: 2px solid #000;
+            height: 155px;
+        }    
+        @media only screen and (max-width: 500px){
+        header {
+            height: 90px;
+        }
+        }
+
+        @media only screen and (min-width: 768px) {
+.header-logo {
+    height: auto;
+}
+}
+    </style>
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="header-top" id="header-top">
+            <div class="container-fluid">
+                <div class="ht-left">
+                    <div class="mail-service">
+                        <p class="awesome">Vision Or Motto of the site</p>
+
+                    </div>
+
+                </div>
+                <div class="ht-right">
+                    <div class="top-social">
+
+                        <a href="#" class=""></a>
+
+                        <a href="#" class=""></a>
+
+                        <a href="#" class=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner-header">
+            <div class="header-logo order-xl-1">
+                <a class=" logo header-logo__link active" href="index.html">
+                    <img width="160px" src="https://lh3.googleusercontent.com/proxy/j1ZrNtlsVp78GSp6tRgldFGVxtJg5I4gWSDhhVEXsF6ydUk0YbOcYM-AXxFHdUf9al_hvGtxqpGMiqoOMsCucsdgK7K5L6Q2C6krdHf-L3uTEPA" alt="">
+                </a>
+            </div>
+            <!-- <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-2 col-md-2">
+                        <div class="logo">
+                            <a class="header-logo__link active" href="index.html">
+                    <img width="160px" src="https://lh3.googleusercontent.com/proxy/j1ZrNtlsVp78GSp6tRgldFGVxtJg5I4gWSDhhVEXsF6ydUk0YbOcYM-AXxFHdUf9al_hvGtxqpGMiqoOMsCucsdgK7K5L6Q2C6krdHf-L3uTEPA" alt="">
+                </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div> -->
+        </div>
+
+    </header>
+    <!-- Header End -->
+
+    <div class="checkout">
+        <div class="page-container" id="PageContainer">
+
+            <!-- <nav class="checkout-breadcrumbs">
+                <nav aria-label="Breadcrumb">
+                    <ul class="breadcrumb ">
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="cart.html">Cart</a>
+                        </li>
+
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="info.html">Information</a>
+                        </li>
+                       <li class="breadcrumb__item breadcrumb__item--current">
+          <a class="breadcrumb__link" href="shipping.html">Shipping</a>
+        </li> 
+                        <li class="breadcrumb__item breadcrumb__item--current">
+                            <span class="breadcrumb__text">Payment</span>
+                        </li>
+                    </ul>
+                </nav>
+            </nav> -->
+            <nav class="checkout-breadcrumbs">
+                <nav aria-label="Breadcrumb">
+                    <ul class="breadcrumb ">
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="cart.html">Cart</a>
+                        </li>
+
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="information.html">Information</a>
+                        </li>
+                        <!-- <li class="breadcrumb__item breadcrumb__item--completed">
+          <a class="breadcrumb__link" href="shipping.html">Shipping</a>
+        </li> -->
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="payment.html">Payment</a>
+                            <!-- <span class="breadcrumb__text">Payment</span> -->
+                        </li>
+                    </ul>
+                </nav>
+            </nav>
+            <aside role="complementary">
+                <button class="order-summary-toggle order-summary-toggle--hide shown-if-js">
+                    <span class="wrap">
+      <span class="order-summary-toggle__inner">
+        <span class="order-summary-toggle__icon-wrapper">
+         
+        </span>
+                    <span class="order-summary-toggle__text order-summary-toggle__text--show">
+          <span>Show order summary</span>
+                    <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000">
+                        <path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z" />
+                    </svg>
+                    </span>
+                    <span class="order-summary-toggle__text order-summary-toggle__text--hide">
+          <span>Hide order summary</span>
+                    <svg width="11" height="7" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000">
+                        <path d="M6.138.876L5.642.438l-.496.438L.504 4.972l.992 1.124L6.138 2l-.496.436 3.862 3.408.992-1.122L6.138.876z" />
+                    </svg>
+                    </span>
+                    <span class="order-summary-toggle__total-recap total-recap">
+          <span class="total-recap__final-price" >$172.96 </span>
+                    </span>
+                    </span>
+                    </span>
+                </button>
+            </aside>
+
+
+            <div class="checkout-content">
+                <div class="checkout-sidebar">
+                    <div class="checkout-sidebar__content">
+                        <div class="sidebar__content--warnings"></div>
+                        <div id="order-summary" class="order-summary order-summary--is-collapsed">
+                            <h2 class="visually-hidden-if-js">Order summary</h2>
+
+                            <div class="order-summary__sections">
+                                <div class="order-summary__section order-summary__section--product-list">
+                                    <div class="order-summary__section__content">
+                                        <table class="product-table">
+                                            <caption class="visually-hidden">Shopping cart</caption>
+                                            <thead class="product-table__header">
+                                                <tr>
+                                                    <th scope="col"><span class="visually-hidden">Product image</span></th>
+                                                    <th scope="col"><span class="visually-hidden">Description</span></th>
+                                                    <th scope="col"><span class="visually-hidden">Quantity</span></th>
+                                                    <th scope="col"><span class="visually-hidden">Price</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="product">
+                                                    <td class="product__image">
+                                                        <div class="product-thumbnail ">
+                                                            <div class="product-thumbnail__wrapper">
+                                                                <img alt="" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0293/9277/products/10-07-20Studio4_CE_TB_10-03-58_6_1236030FN_Purplecombo_52974_CROP_WG_small.jpg?v=1602118733">
+                                                            </div>
+                                                            <span class="product-thumbnail__quantity" aria-hidden="true">2</span>
+                                                        </div>
+                                                    </td>
+                                                    <th class="product__description" scope="row">
+                                                        <span class="product__description__name order-summary__emphasis product__vendor">Vendor name</span>
+                                                        <span class="product__description__name order-summary__emphasis">Product name</span>
+                                                        <span class="product__description__variant order-summary__small-text">XL</span>
+                                                    </th>
+                                                    <td class="product__quantity visually-hidden">
+                                                        2
+                                                    </td>
+                                                    <td class="product__price">
+                                                        <span class="order-summary__emphasis">$69.98 </span>
+                                                        <h6 class="order-delivery__cost">Delivery: $3 </h6>
+                                                    </td>
+                                                </tr>
+                                                <tr class="product">
+                                                    <td class="product__image">
+                                                        <div class="product-thumbnail ">
+                                                            <div class="product-thumbnail__wrapper">
+                                                                <img alt="" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0293/9277/products/10-07-20Studio4_CE_TB_10-03-58_6_1236030FN_Purplecombo_52974_CROP_WG_small.jpg?v=1602118733">
+                                                            </div>
+                                                            <span class="product-thumbnail__quantity" aria-hidden="true">2</span>
+                                                        </div>
+                                                    </td>
+                                                    <th class="product__description" scope="row">
+                                                        <span class="product__description__name order-summary__emphasis product__vendor">Vendor name</span>
+                                                        <span class="product__description__name order-summary__emphasis">Product name</span>
+                                                        <span class="product__description__variant order-summary__small-text">XL</span>
+                                                    </th>
+                                                    <td class="product__quantity visually-hidden">
+                                                        2
+                                                    </td>
+                                                    <td class="product__price">
+                                                        <span class="order-summary__emphasis">$69.98 </span>
+                                                        <h6 class="order-delivery__cost">Delivery: Free</h6>
+                                                    </td>
+                                                </tr>
+                                                <tr class="product">
+                                                    <td class="product__image">
+                                                        <div class="product-thumbnail ">
+                                                            <div class="product-thumbnail__wrapper">
+                                                                <img alt="" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0293/9277/products/10-07-20Studio4_CE_TB_10-03-58_6_1236030FN_Purplecombo_52974_CROP_WG_small.jpg?v=1602118733">
+                                                            </div>
+                                                            <span class="product-thumbnail__quantity" aria-hidden="true">2</span>
+                                                        </div>
+                                                    </td>
+                                                    <th class="product__description" scope="row">
+                                                        <span class="product__description__name order-summary__emphasis product__vendor">Vendor name</span>
+                                                        <span class="product__description__name order-summary__emphasis">Product name</span>
+                                                        <span class="product__description__variant order-summary__small-text">XL</span>
+                                                    </th>
+                                                    <td class="product__quantity visually-hidden">
+                                                        2
+                                                    </td>
+                                                    <td class="product__price">
+                                                        <span class="order-summary__emphasis">$69.98 </span>
+                                                        <h6 class="order-delivery__cost">Delivery: $3 </h6>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="order-summary__section order-summary__section--discount">
+                                    <div class="fieldset">
+                                        <div class="field">
+                                            <div class="field__input-btn-wrapper">
+                                                <div class="field__input-wrapper">
+                                                    <label class="field__label field__label--visible" for="">Gift card or discount code</label>
+                                                    <input placeholder="Gift card or discount code" class="field__input" id="checkout_reduction_code">
+                                                </div>
+                                                <button name="button" type="submit" class="field__input-btn btn btn--disabled" disabled="disabled">
+                                                    <span class="btn__content visually-hidden-on-mobile" aria-hidden="true">
+                Apply
+              </span>
+                                                    <span class="visually-hidden">
+                Apply Discount Code
+              </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="order-summary__section order-summary__section--total-lines">
+                                    <table class="total-line-table">
+                                        <caption class="visually-hidden">Cost summary</caption>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><span class="visually-hidden">Description</span></th>
+                                                <th scope="col"><span class="visually-hidden">Price</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="total-line-table__tbody">
+                                            <tr class="total-line total-line--subtotal">
+                                                <th class="total-line__name" scope="row">Subtotal</th>
+                                                <td class="total-line__price">
+                                                    <span class="order-summary__emphasis">$157.96 </span>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr class="total-line total-line--shipping">
+                                                <th class="total-line__name" scope="row">
+                                                    <span> Delivery cost</span>
+                                                </th>
+                                                <td class="total-line__price">
+                                                    <span class="order-summary__emphasis">
+    $6 
+    </span>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="total-line">
+                                                <th class="total-line__name" scope="row">Taxes</th>
+                                                <td class="total-line__price">
+                                                    <span class="order-summary__emphasis">
+            $29.62 
+          </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot class="total-line-table__footer">
+                                            <tr class="total-line">
+                                                <th class="total-line__name payment-due-label" scope="row">
+                                                    <span class="payment-due-label__total">Total</span>
+                                                </th>
+                                                <td class="total-line__price payment-due">
+                                                    <span class="payment-due__price">
+          $227.08 
+        </span>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="visually-hidden" data-order-summary-section="accessibility-live-region">
+                            <div aria-live="polite" aria-atomic="true" role="status">
+                                Updated total price:
+                                <span data-checkout-payment-due-target="22708">
+      $227.08 
+    </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="checkout-main" role="main">
+
+                    <div class="checkout-main__content">
+
+
+                        <div class="section section--contact-information">
+                            <div class="section__header">
+                                <div class="layout-flex layout-flex--tight-vertical layout-flex--loose-horizontal layout-flex--wrap">
+                                    <h2 class="section__title layout-flex__item layout-flex__item--stretch" id="main-header" tabindex="-1">
+        Contact information
+      </h2>
+                                    <p class="layout-flex__item">
+                                        <span aria-hidden="true">Already have an account?</span>
+                                        <a href="login.html">
+                                            <span class="visually-hidden">Already have an account?</span> Log in
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="section__content">
+                                <div class="fieldset">
+                                    <div class="field field--required">
+                                        <div class="field__input-wrapper">
+                                            <label class="field__label field__label--visible" for="">Email</label>
+                                            <input placeholder="Email" aria-required="true" class="field__input" size="30" type="email" value="" name="" id="checkout_email">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fieldset-description">
+                                    <div class="section__content">
+                                        <div class="checkbox-wrapper">
+                                            <div class="checkbox__input">
+                                                <input name="" type="hidden" value="0">
+                                                <input class="input-checkbox" type="checkbox" value="1" checked="checked" name="">
+                                            </div>
+                                            <label class="checkbox__label" for="checkout_buyer_accepts_marketing">
+                                                Keep me up to date on news and exclusive offers
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="section section--shipping-address" data-shipping-address="">
+                            <div class="section__header">
+                                <h2 class="section__title" id="section-delivery-title">
+          Shipping address
+      </h2>
+                            </div>
+
+                            <div class="section__content">
+
+                                <div class="fieldset">
+                                    <div class="address-fields">
+
+                                        <div class="field field--required field--half" data-address-field="first_name">
+
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label field__label--visible" for="checkout_shipping_address_first_name">First name</label>
+                                                <input placeholder="First name" autocomplete="shipping given-name" autocorrect="off" data-trekkie-id="shipping_firstname_field" data-backup="first_name" class="field__input" aria-required="true" size="30" type="text" value="" name="checkout[shipping_address][first_name]"
+                                                id="checkout_shipping_address_first_name">
+                                            </div>
+                                        </div>
+                                        <div class="field field--required field--half" data-address-field="last_name">
+
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label field__label--visible" for="checkout_shipping_address_last_name">Last name</label>
+                                                <input placeholder="Last name" autocomplete="shipping family-name" autocorrect="off" data-backup="last_name" data-trekkie-id="shipping_lastname_field" class="field__input" aria-required="true" size="30" type="text" value="" name="checkout[shipping_address][last_name]"
+                                                id="checkout_shipping_address_last_name">
+                                            </div>
+                                        </div>
+                                        <div data-address-field="company" data-autocomplete-field-container="true" class="field field--optional">
+
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label field__label--visible" for="checkout_shipping_address_company">Company (optional)</label>
+                                                <input placeholder="Company (optional)" autocomplete="shipping organization" autocorrect="off" data-trekkie-id="shipping_company_field" data-backup="company" class="field__input" size="30" type="text" value="" name="" id="checkout_shipping_address_company">
+                                            </div>
+                                        </div>
+
+                                        <div class="field field--required">
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label field__label--visible" for="">Address</label>
+                                                <input placeholder="Address" class="field__input" type="text" value="" name="">
+                                            </div>
+                                        </div>
+
+                                        <div class="field field--required">
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label field__label--visible" for="">Apartment, suite, etc. (optional)</label>
+                                                <input placeholder="Apartment, suite, etc. (optional)" class="field__input" size="30" type="text" value="" name="">
+                                            </div>
+                                        </div>
+
+                                        <div class="field field--required">
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label field__label--visible" for=""> City </label>
+                                                <input placeholder="City" class="field__input" type="text" value="" name="">
+                                            </div>
+                                        </div>
+
+                                        <div class="field field--required field--show-floating-label field--third">
+                                            <div class="field__input-wrapper field__input-wrapper--select">
+                                                <label class="field__label field__label--visible" for="">Country/Region</label>
+                                                <select size="1" class="field__input field__input--select" aria-required="true" name="" id="">
+                                                    <option data-code="CA" value="Australia">Australia</option>
+                                                    <option data-code="US" value="United States">United States</option>
+                                                    <option data-code="GB" value="United Kingdom">United Kingdom</option>
+                                                    <option data-code="AU" value="Australia">Australia</option>
+                                                </select>
+                                                <div class="field__caret">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="field field--required field--show-floating-label field--third">
+                                            <div class="field__input-wrapper field__input-wrapper--select">
+                                                <label class="field__label field__label--visible" for="">Province</label>
+                                                <select placeholder="State" class="field__input field__input--select" aria-required="true" name="">
+                                                    <option disabled="">Province</option>
+                                                    <option value="">Ontario</option>
+                                                    <option value=""> Alberta </option>
+                                                    <option value=""> British Columbia </option>
+                                                    <option value=""> Manitoba </option>
+                                                    <option value=""> New Brunswick </option>
+                                                    <option value=""> Newfoundland and Labrador </option>
+                                                    <option value=""> Nova Scotia </option>
+                                                    <option value=""> Northwest Territories </option>
+                                                    <option value=""> Nunavut </option>
+                                                    <option value=""> Prince Edward Island </option>
+                                                    <option value=""> Quebec </option>
+                                                    <option value=""> Saskatchewan </option>
+                                                    <option value=""> Yukon. </option>
+                                                </select>
+                                                <div class="field__caret shown-if-js">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="field field--required field--third">
+                                            <div class="field__input-wrapper">
+                                                <label class="field__label field__label--visible">ZIP code</label>
+                                                <input placeholder="ZIP Code" class="field__input" type="text" value="" name="">
+                                            </div>
+                                        </div>
+
+                                        <div class="field field--required">
+                                            <div class="field__input-wrapper field__input-wrapper--icon-right">
+                                                <label class="field__label field__label--visible" for="checkout_shipping_address_phone">Phone</label>
+                                                <input placeholder="Phone" class="field__input" type="text" value="" name="">
+                                                <div id="phone_tooltip" role="tooltip" class="field__icon has-tooltip">
+                                                    <span id="tooltip-for-phone" class="tooltip">
+            In case we need to contact you about your order
+          </span>
+                                                    <div class="field__icon-svg">
+                                                        <svg class="icon-svg icon-svg--color-adaptive-lighter icon-svg--size-16 icon-svg--block" role="presentation" aria-hidden="true" focusable="false">
+                                                            <use xlink:href="#question"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="step__footer">
+                                <button name="button" type="submit" class="step__footer__continue-btn btn">
+                                    <span class="btn__content">Continue to payment</span>
+                                </button>
+                                <a class="step__footer__previous-link" href="cart.html">
+                                    <svg focusable="false" aria-hidden="true" class="icon-svg icon-svg--color-accent icon-svg--size-10 previous-link__icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+                                        <path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4" />
+                                    </svg>
+                                    <span class="step__footer__previous-link-content">Return to cart</span></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="wrapper">
+        <section class="columns">
+            <div class="column text-white text-center">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear());
+                </script> souk All Rights Reserved
+            </div>
+        </section>
+
+    </div>
+    <!-- Footer Section End -->
+
+
+    <!-- Js Plugins -->
+
+    <script src="{% static 'home/menu/js/jquery.mobile.custom.min.js' %} "></script>
+    <script src="{% static 'home/menu/js/main.js' %} "></script>
+    <!-- Resource jQuery -->
+
+    <script src="{% static 'home/js/bootstrap.min.js' %} "></script>
+    <script src="{% static 'home/js/jquery.slicknav.js' %} "></script>
+    <!-- For hero slider-->
+    <script src="{% static 'home/js/owl.carousel.min.js' %} "></script>
+    <!-- For hero slider-->
+    <script src="{% static 'home/js/main2.js' %} "></script>
+    <script src="{% static 'home/js/custom.js' %} "></script>
+    <script src="{% static 'home/js/index.js' %} "></script>
+    <script src="{% static 'home/assets/js/bootstrap.min.js' %} "></script>
+
+
+    <script>
+        $(document).ready(function(){
+            $(".order-summary-toggle__text").click(function(){
+           $(".checkout-sidebar__content").toggle()
+           });
+          
+        })
+    </script>
+</body>
+
+</html>

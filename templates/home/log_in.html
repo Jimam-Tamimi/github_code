@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% block title %}Join{% endblock title %} 
+{% block breadcrumb %}Join{% endblock breadcrumb %} 
+
+
+{% block content %}
+
+ 
+  <div class="login-page my-5">
+    <div id="CustomerLoginForm" class="form-vertical">
+        <h1 id="LoginHeading">Customer Login</h1>
+        <!-- <div class="form-message form-message--success hide" id="ResetSuccess">
+        We've sent you an email with a link to update your password.
+        </div> -->
+
+        <p>
+        Not a member? <a href="join.html" id="customer_register_link">Join Us</a>
+        </p><form method="post" action="/account/login/" id="LoginForm" accept-charset="UTF-8"><input type="hidden" name="form_type" value="customer_login"><input type="hidden" name="utf8" value="✓">
+        {% csrf_token %}
+
+        <div class="form-input-wrapper">
+            <input class="form-input-wrapper__input" type="email" name="customer[email]" id="LoginForm-email" placeholder=" " autocomplete="email" autocorrect="off" autocapitalize="off" required="" aria-required="true">
+            <label class="form-input-wrapper__label" for="LoginForm-email">Email</label>
+        </div>
+
+        
+            <div class="form-input-wrapper">
+            <input class="form-input-wrapper__input" type="password" value="" name="customer[password]" id="LoginForm-password" placeholder=" " required="" aria-required="true">
+            <label class="form-input-wrapper__label" for="LoginForm-password">Password</label>
+            </div>
+            <p class="form-input-info"><a href="#recover" id="RecoverPassword">Forgot your password?</a></p>
+        
+
+        <input type="submit" class="button-primary" value="Login">
+
+        <input type="hidden" name="return_url" value="/account"></form>
+    </div>
+
+
+  </div>
+
+{% endblock content %}

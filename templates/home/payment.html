@@ -1,0 +1,617 @@
+{% extends 'base.html' %} 
+{% block title %}Payment{% endblock title %} 
+{% block breadcrumb %}Payment{% endblock breadcrumb %} 
+
+{% block css %}
+
+<style>
+        header {
+            border-bottom: 2px solid #000;
+            height: 155px;
+        }
+        
+        @media only screen and (max-width: 500px){
+        header {
+            height: 90px;
+        }
+        }
+
+                @media only screen and (min-width: 768px) {
+.header-logo {
+    height: auto;
+}
+}
+        .form-group h6 {
+          font-size: 13px;
+          font-weight: bold;
+        }
+        .form-control {
+          height: calc(1.9em + 1.75rem + 2px);
+          font-size: 1.1em;
+        }
+    </style>
+
+{% endblock css %}
+
+{% block content %}
+
+
+    <div class="checkout">
+        <div class="page-container" id="PageContainer">
+
+            <nav class="checkout-breadcrumbs">
+                <nav aria-label="Breadcrumb">
+                    <ul class="breadcrumb ">
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="cart.html">Cart</a>
+                        </li>
+
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="information.html">Information</a>
+                        </li>
+                        <!-- <li class="breadcrumb__item breadcrumb__item--completed">
+          <a class="breadcrumb__link" href="shipping.html">Shipping</a>
+        </li> -->
+                        <li class="breadcrumb__item breadcrumb__item--completed">
+                            <a class="breadcrumb__link" href="payment.html">Payment</a>
+                            <!-- <span class="breadcrumb__text">Payment</span> -->
+                        </li>
+                    </ul>
+                </nav>
+            </nav>
+
+            <aside role="complementary">
+                <button class="order-summary-toggle order-summary-toggle--hide shown-if-js">
+                    <span class="wrap">
+      <span class="order-summary-toggle__inner">
+        <span class="order-summary-toggle__icon-wrapper">
+         
+        </span>
+                    <span class="order-summary-toggle__text order-summary-toggle__text--show">
+          <span>Show order summary</span>
+                    <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000">
+                        <path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z" />
+                    </svg>
+                    </span>
+                    <span class="order-summary-toggle__text order-summary-toggle__text--hide">
+          <span>Hide order summary</span>
+                    <svg width="11" height="7" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000">
+                        <path d="M6.138.876L5.642.438l-.496.438L.504 4.972l.992 1.124L6.138 2l-.496.436 3.862 3.408.992-1.122L6.138.876z" />
+                    </svg>
+                    </span>
+                    <span class="order-summary-toggle__total-recap total-recap">
+          <span class="total-recap__final-price" >$172.96 </span>
+                    </span>
+                    </span>
+                    </span>
+                </button>
+            </aside>
+
+            <div class="checkout-content">
+                <div class="checkout-sidebar">
+                    <div class="checkout-sidebar__content">
+                        <!-- <div class="sidebar__content--warnings">
+      </div>      -->
+                        <div id="order-summary" class="order-summary order-summary--is-collapsed">
+                            <h2 class="visually-hidden-if-js">Order summary</h2>
+
+                            <div class="order-summary__sections">
+                                <div class="order-summary__section order-summary__section--product-list">
+                                    <div class="order-summary__section__content">
+                                        <table class="product-table">
+                                            <caption class="visually-hidden">Shopping cart</caption>
+                                            <thead class="product-table__header">
+                                                <tr>
+                                                    <th scope="col"><span class="visually-hidden">Product image</span></th>
+                                                    <th scope="col"><span class="visually-hidden">Description</span></th>
+                                                    <th scope="col"><span class="visually-hidden">Quantity</span></th>
+                                                    <th scope="col"><span class="visually-hidden">Price</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="product">
+                                                    <td class="product__image">
+                                                        <div class="product-thumbnail ">
+                                                            <div class="product-thumbnail__wrapper">
+                                                                <img alt="" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0293/9277/products/10-07-20Studio4_CE_TB_10-03-58_6_1236030FN_Purplecombo_52974_CROP_WG_small.jpg?v=1602118733">
+                                                            </div>
+                                                            <span class="product-thumbnail__quantity" aria-hidden="true">2</span>
+                                                        </div>
+                                                    </td>
+                                                    <th class="product__description" scope="row">
+                                                        <span class="product__description__name order-summary__emphasis product__vendor">Vendor name</span>
+                                                        <span class="product__description__name order-summary__emphasis">Product name</span>
+                                                        <span class="product__description__variant order-summary__small-text">XL</span>
+                                                    </th>
+                                                    <td class="product__quantity visually-hidden">
+                                                        2
+                                                    </td>
+                                                    <td class="product__price">
+                                                        <span class="order-summary__emphasis">$69.98 </span>
+                                                        <h6 class="order-delivery__cost">Delivery: $3 </h6>
+                                                    </td>
+                                                </tr>
+                                                <tr class="product">
+                                                    <td class="product__image">
+                                                        <div class="product-thumbnail ">
+                                                            <div class="product-thumbnail__wrapper">
+                                                                <img alt="" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0293/9277/products/10-07-20Studio4_CE_TB_10-03-58_6_1236030FN_Purplecombo_52974_CROP_WG_small.jpg?v=1602118733">
+                                                            </div>
+                                                            <span class="product-thumbnail__quantity" aria-hidden="true">2</span>
+                                                        </div>
+                                                    </td>
+                                                    <th class="product__description" scope="row">
+                                                        <span class="product__description__name order-summary__emphasis product__vendor">Vendor name</span>
+                                                        <span class="product__description__name order-summary__emphasis">Product name</span>
+                                                        <span class="product__description__variant order-summary__small-text">XL</span>
+                                                    </th>
+                                                    <td class="product__quantity visually-hidden">
+                                                        2
+                                                    </td>
+                                                    <td class="product__price">
+                                                        <span class="order-summary__emphasis">$69.98 </span>
+                                                        <h6 class="order-delivery__cost">Delivery: $3 </h6>
+                                                    </td>
+                                                </tr>
+                                                <tr class="product">
+                                                    <td class="product__image">
+                                                        <div class="product-thumbnail ">
+                                                            <div class="product-thumbnail__wrapper">
+                                                                <img alt="" class="product-thumbnail__image" src="//cdn.shopify.com/s/files/1/0293/9277/products/10-07-20Studio4_CE_TB_10-03-58_6_1236030FN_Purplecombo_52974_CROP_WG_small.jpg?v=1602118733">
+                                                            </div>
+                                                            <span class="product-thumbnail__quantity" aria-hidden="true">2</span>
+                                                        </div>
+                                                    </td>
+                                                    <th class="product__description" scope="row">
+                                                        <span class="product__description__name order-summary__emphasis product__vendor">Vendor name</span>
+                                                        <span class="product__description__name order-summary__emphasis">Product name</span>
+                                                        <span class="product__description__variant order-summary__small-text">XL</span>
+                                                    </th>
+                                                    <td class="product__quantity visually-hidden">
+                                                        2
+                                                    </td>
+                                                    <td class="product__price">
+                                                        <span class="order-summary__emphasis">$69.98 </span>
+                                                        <h6 class="order-delivery__cost">Delivery: $3 </h6>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="order-summary__section order-summary__section--discount">
+                                    <div class="fieldset">
+                                        <div class="field">
+                                            <div class="field__input-btn-wrapper">
+                                                <div class="field__input-wrapper">
+                                                    <label class="field__label field__label--visible" for="">Gift card or discount code</label>
+                                                    <input placeholder="Gift card or discount code" class="field__input" id="checkout_reduction_code">
+                                                </div>
+                                                <button name="button" type="submit" class="field__input-btn btn btn--disabled">
+                                                    <span class="btn__content visually-hidden-on-mobile" aria-hidden="true">
+                Apply
+              </span>
+                                                    <span class="visually-hidden">
+                Apply Discount Code
+              </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="order-summary__section order-summary__section--total-lines">
+                                    <table class="total-line-table">
+                                        <caption class="visually-hidden">Cost summary</caption>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><span class="visually-hidden">Description</span></th>
+                                                <th scope="col"><span class="visually-hidden">Price</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="total-line-table__tbody">
+                                            <tr class="total-line total-line--subtotal">
+                                                <th class="total-line__name" scope="row">Subtotal</th>
+                                                <td class="total-line__price">
+                                                    <span class="order-summary__emphasis">
+      $157.96 
+    </span>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr class="total-line total-line--shipping">
+                                                <th class="total-line__name" scope="row">
+                                                    <span>
+        Delivery cost
+      </span>
+                                                </th>
+                                                <td class="total-line__price">
+                                                    <span class="order-summary__emphasis">
+    $9 
+    </span>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="total-line">
+                                                <th class="total-line__name" scope="row">Taxes</th>
+                                                <td class="total-line__price">
+                                                    <span class="order-summary__emphasis">
+            $29.62 
+          </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot class="total-line-table__footer">
+                                            <tr class="total-line">
+                                                <th class="total-line__name payment-due-label" scope="row">
+                                                    <span class="payment-due-label__total">Total</span>
+                                                </th>
+                                                <td class="total-line__price payment-due">
+                                                    <!-- <span class="payment-due__currency"></span> -->
+                                                    <span class="payment-due__price">
+          $227.08 
+        </span>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="checkout-main" role="main">
+                    <div class="checkout-main__header">
+                        <div class="shown-if-js" data-alternative-payments>
+                        </div>
+                    </div>
+                    <div class="checkout-main__content">
+
+                        <div class="step" data-step="payment_method" data-last-step="true">
+
+
+                            <div class="step__sections">
+
+
+                                <div class="section">
+                                    <div class="content-box">
+                                        <div role="table" class="content-box__row content-box__row--tight-spacing-vertical">
+                                            <div role="row" class="review-block">
+                                                <div class="review-block__inner">
+                                                    <div role="rowheader" class="review-block__label">
+                                                        Contact
+                                                    </div>
+                                                    <div role="cell" class="review-block__content">
+                                                        <bdo dir="ltr">bbb@gmail.com</bdo>
+                                                    </div>
+                                                </div>
+                                                <div role="cell" class="review-block__link">
+                                                    <a data-trekkie-id="change_contact_method_link" class="link--small" href="">
+                                                        <span aria-hidden="true">Change</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+
+                                            <div role="row" class="review-block">
+                                                <div class="review-block__inner">
+                                                    <div role="rowheader" class="review-block__label">
+                                                        Ship to
+                                                    </div>
+                                                    <div role="cell" class="review-block__content">
+                                                        <address class="address address--tight">
+          London, Australia
+        <address>
+    </div>
+  </div>
+      <div role="cell" class="review-block__link">
+        <a class="link--small"  href="">
+          <span aria-hidden="true">Change</span>
+</a>      
+</div>
+</div>
+       
+<div role="row" class="review-block">
+  <div class="review-block__inner">
+    <div role="rowheader" class="review-block__label">
+      Method
+    </div>
+    <div role="cell" class="review-block__content">
+      FREE International Standard Shipping Over $125 (5-10 Business Day Transit Time)
+       ·
+      <strong class="emphasis">Free</strong>
+    </div>
+  </div>
+    <div role="cell" class="review-block__link">
+      <a data-trekkie-id="change_shipping_method_link" href="/">
+        <span aria-hidden="true">Change</span>
+</a>    </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+<form class="edit_checkout animate-floating-labels" method="post">
+      
+<div class="section section--payment-method" data-payment-method="">
+  <div class="section__header">
+    <h2 class="section__title pt-5" id="main-header" tabindex="-1">
+      Payment
+    </h2>
+      <p class="section__text">
+        All transactions are secure and encrypted.
+      </p>
+  </div>
+        
+  <div class="section__content">
+    <div class="container-fluid pr-0">
+        <div class="row ">
+              <div class="col-12 bg-white pl-2 pr-2 mx-auto">
+                
+                          <div class="pt-2 pl-2 pr-2">
+                              <!-- Credit card form tabs -->
+                              <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill">
+                                  <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
+                                  <!-- <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
+                                  <li class="nav-item"> <a data-toggle="pill" href="#stripe" class="nav-link "> <i class="fab fa-stripe mr-2"></i> Stripe </a> </li>
+                               -->
+                                </ul>
+                          </div> <!-- End -->
+                          <!-- Credit card form content -->
+                          <div class="tab-content">
+                              <!-- credit card info-->
+                              <div id="credit-card" class="tab-pane fade show active pt-3">
+                                  <form role="form">
+                                      <div class="form-group"> <label for="username">
+                                              <h6>Card Owner</h6>
+                                          </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control "> </div>
+                                      <div class="form-group"> <label for="cardNumber">
+                                              <h6>Card number</h6>
+                                          </label>
+                                          <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
+                                              <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-sm-8">
+                                              <div class="form-group"> <label><span class="hidden-xs">
+                                                          <h6>Expiration Date</h6>
+                                                      </span></label>
+                                                  <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-sm-4">
+                                              <div class="form-group"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                                      <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                                  </label> <input type="text" required class="form-control"> </div>
+                                          </div>
+                                      </div>
+                                      <div class="">
+                                        
+                                  </form>
+                              </div>
+                          </div> <!-- End -->
+                          <!-- Paypal info -->
+                          <!-- <div id="paypal" class="tab-pane fade pt-3">
+                               <h6 class="py-2">Select your paypal account type</h6>
+                              <div class="form-group "> <label class="radio-inline"> <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
+                               
+                              <p> <button type="button" class="btn btn-primary mt-2"><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
+                              <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+                          </div>  -->
+                          <!-- End -->
+                          <!-- Stripe info -->
+                          <!-- <div id="stripe" class="tab-pane fade pt-3 mt-2">
+                             <p> <button type="button" class="btn btn-primary "><i class="fab fa-stripe mr-2"></i> Log into my Stripe</button> </p>
+                              <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
+                          </div> -->
+                           <!-- End -->
+                          <!-- End -->
+                    
+                 
+              </div>
+          </div>
+      
+      </div> 
+</div>
+</div>
+
+   <div class="section section--billing-address" >
+    <div class="section__header">
+      <h2 class="section__title">Billing address</h2>
+      <p class="section__text">
+        Select the address that matches your card or payment method.
+      </p>
+    </div>
+
+    <div class="section__content">
+          <fieldset class="content-box">
+            <legend class="visually-hidden">Choose a billing address</legend>
+
+            <div class="radio-wrapper content-box__row" >
+              <div class="radio__input">
+                <input class="input-radio display_address__box_none" type="radio" id="radio-1" name="address">
+              </div>
+
+              <label class="radio__label content-box__emphasis" for="radio-1">
+                Same as shipping address
+</label>            </div>
+
+            <div class="radio-wrapper content-box__row" >
+              <div class="radio__input">
+                <input class="input-radio display_address__box" type="radio" id="radio-2" name="address">
+              </div>
+              <label class="radio__label content-box__emphasis" for="radio-2">
+                Use a different billing address
+</label>            </div>
+
+            <div class="radio-group__row content-box__row content-box__row--secondary hidden" id="section--billing-address__different">
+              <div class="fieldset">
+                 <div class="section__content">
+        
+        <div class="fieldset">
+          <div class="address-fields" >
+
+  <div class="field field--required field--half" data-address-field="first_name">
+    
+    <div class="field__input-wrapper"><label class="field__label field__label--visible" for="checkout_shipping_address_first_name">First name</label>
+      <input placeholder="First name" autocomplete="shipping given-name" autocorrect="off" data-trekkie-id="shipping_firstname_field" data-backup="first_name" class="field__input" aria-required="true" size="30" type="text" value="" name="checkout[shipping_address][first_name]" id="checkout_shipping_address_first_name">
+    </div>
+</div><div class="field field--required field--half" data-address-field="last_name">
+    
+    <div class="field__input-wrapper"><label class="field__label field__label--visible" for="checkout_shipping_address_last_name">Last name</label>
+      <input placeholder="Last name" autocomplete="shipping family-name" autocorrect="off" data-backup="last_name" data-trekkie-id="shipping_lastname_field" class="field__input" aria-required="true" size="30" type="text" value="" name="checkout[shipping_address][last_name]" id="checkout_shipping_address_last_name">
+    </div>
+</div><div data-address-field="company" data-autocomplete-field-container="true" class="field field--optional">
+      
+      <div class="field__input-wrapper"><label class="field__label field__label--visible" for="checkout_shipping_address_company">Company (optional)</label>
+        <input placeholder="Company (optional)" autocomplete="shipping organization" autocorrect="off" data-trekkie-id="shipping_company_field" data-backup="company" class="field__input" size="30" type="text" value="" name="" id="checkout_shipping_address_company">
+      </div>
+</div>
+
+<div class="field field--required">
+  <div class="field__input-wrapper">
+    <label class="field__label field__label--visible" for="">Address</label>
+    <input placeholder="Address" class="field__input" type="text" value="" name="" >
+  </div>
+</div>
+
+<div class="field field--required">
+    <div class="field__input-wrapper">
+      <label class="field__label field__label--visible" for="">Apartment, suite, etc. (optional)</label>
+    <input placeholder="Apartment, suite, etc. (optional)" class="field__input" size="30" type="text" value="" name="" >
+</div>
+</div>
+
+<div class="field field--required">
+  <div class="field__input-wrapper">
+    <label class="field__label field__label--visible" for=""> City </label>
+    <input placeholder="City" class="field__input" type="text" value="" name="" >
+  </div>
+</div>
+
+<div class="field field--required field--show-floating-label field--third">   
+  <div class="field__input-wrapper field__input-wrapper--select">
+    <label class="field__label field__label--visible" for="">Country/Region</label>
+      <select size="1" class="field__input field__input--select" aria-required="true" name="" id="">
+        <option data-code="CA" value="Australia">Australia</option>
+        <option data-code="US" value="United States">United States</option>
+        <option data-code="GB" value="United Kingdom">United Kingdom</option>
+        <option data-code="AU" value="Australia">Australia</option>   
+      </select>
+      <div class="field__caret">
+      </div>
+    </div>
+</div>
+  
+     
+<div class="field field--required field--show-floating-label field--third">
+    <div class="field__input-wrapper field__input-wrapper--select">
+      <label class="field__label field__label--visible" for="">Province</label>
+      <select placeholder="State" class="field__input field__input--select" aria-required="true" name=""><option disabled="">Province</option>
+      <option value="">Ontario</option>
+      <option value=""> Alberta </option>
+      <option value=""> British Columbia </option>
+      <option value=""> Manitoba </option>
+      <option value=""> New Brunswick </option>
+      <option value=""> Newfoundland and Labrador </option>
+      <option value=""> Nova Scotia </option>
+      <option value=""> Northwest Territories </option>
+      <option value=""> Nunavut </option>
+      <option value=""> Prince Edward Island </option>
+      <option value=""> Quebec </option>
+      <option value=""> Saskatchewan </option>
+      <option value=""> Yukon. </option>
+    </select>
+      <div class="field__caret shown-if-js">
+      </div>
+    </div>
+</div>
+
+<div class="field field--required field--third">   
+    <div class="field__input-wrapper">
+      <label class="field__label field__label--visible">ZIP code</label>
+      <input placeholder="ZIP Code" class="field__input" type="text" value="" name="" >
+    </div>
+</div>
+
+<div class="field field--required">  
+      <div class="field__input-wrapper field__input-wrapper--icon-right">
+        <label class="field__label field__label--visible" for="checkout_shipping_address_phone">Phone</label>
+        <input placeholder="Phone" class="field__input" type="text" value="" name="" >
+        <div id="phone_tooltip" role="tooltip" class="field__icon has-tooltip">
+          <span id="tooltip-for-phone" class="tooltip">
+            In case we need to contact you about your order
+          </span>
+          <div class="field__icon-svg">
+            <svg class="icon-svg icon-svg--color-adaptive-lighter icon-svg--size-16 icon-svg--block" role="presentation" aria-hidden="true" focusable="false"> <use xlink:href="#question"></use> </svg>
+          </div>
+        </div>      
+      </div>
+</div>
+
+
+      </div> 
+</div> 
+
+
+  </div>
+              </div>
+            </div>
+          </fieldset>
+    </div>
+  </div> 
+
+  <div class="section section--remember-me shown-if-js">
+    <div class="section__header">
+      <h2 class="section__title">Remember me</h2>
+    </div>
+
+    <div class="section__content">
+      <div class="content-box">
+        <div class="content-box__row">
+          <div class="checkbox-wrapper">
+            <div class="checkbox__input">
+              <input class="input-checkbox" type="checkbox">
+            </div>
+            <label class="checkbox__label content-box__emphasis">
+              Save my information for a faster checkout
+            </label>          
+          </div>
+        </div>
+      </div>
+    </div>
+</form> 
+
+</div>
+       <div class="step__footer">
+    <button name="button" type="submit"  class="step__footer__continue-btn btn" >
+      <span class="btn__content">Complete order</span>
+    </button>
+  <a class="step__footer__previous-link" href="info.html">
+    <svg focusable="false" aria-hidden="true" class="icon-svg icon-svg--color-accent icon-svg--size-10 previous-link__icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4"/></svg>
+    <span class="step__footer__previous-link-content">Return to information</span></a>
+</div>
+</div>
+
+
+ </div>
+ 
+</div>
+</div>
+
+  </div>
+  </div>
+ 
+
+{% endblock content %}

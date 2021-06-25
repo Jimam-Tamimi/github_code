@@ -1,0 +1,604 @@
+{% extends 'base.html' %} 
+{% block title %}Favourites{% endblock title %} 
+{% block breadcrumb %}Favourites{% endblock breadcrumb %} 
+{% block content %} 
+{% load static %}
+
+<section class="w3l-ecommerce-main-inn">
+  <h3 class="hny-title text-center">favorites</h3>
+  <!--/mag-content-->
+  <div class="ecomrhny-content-inf">
+    <div class="container py-lg-2">
+      <!--/row1-->
+      <div class="ecommerce-grids row">
+        <div class="ecommerce-right-hny col-lg-12">
+          <div class="row ecomhny-topbar">
+            <div class="col-12 ecomhny-result">
+              <h4 id="fav-length" class="ecomhny-result-count">
+                {{favorites|length}} 
+              </h4>
+            </div>
+          </div>
+          <!-- /row-->
+          <div id="fav-prod-wrapper" class="ecom-products-grids row">
+            {% if user.is_authenticated %} {% for favorite in favorites %}
+
+            <div
+              id="{{favorite.product.id}}"
+              class="col-lg-2 col-6 product-incfhny mb-4"
+            >
+              <div class="product-grid2 transmitv">
+                <div class="product-image2">
+                  <a href="ecommerce-single.html">
+                    <img
+                      style="height: 230px; width: 177px"
+                      class="pic-1 img-fluid"
+                      src="
+                                                {% if favorite.product.image_url == '' %}
+                                                /media/{{favorite.product.image}}
+                                                {% else %}
+                                                {{favorite.product.image_url}}
+                                                {% endif %}                                                "
+                    />
+                    <img
+                      style="height: 230px; width: 177px"
+                      class="pic-2 img-fluid"
+                      src="
+                                                {% if favorite.product.image_url == '' %}
+                                                /media/{{favorite.product.image}}
+                                                {% else %}
+                                                {{favorite.product.image_url}}
+                                                {% endif %}
+                                                "
+                    />
+                  </a>
+                  <ul class="social">
+                    <li>
+                      <a onclick="removeFromFav(this, {{favorite.product.id}})" data-tip="Remove From Fav"
+                        ><span class="fa fa-heart"></span
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="#" data-tip="Quick View"
+                        ><span class="fa fa-eye"></span
+                      ></a>
+                    </li>
+
+                    <li>
+                      <a href="ecommerce.html" data-tip="Add to Cart"
+                        ><span class="fa fa-shopping-bag"></span
+                      ></a>
+                    </li>
+                  </ul>
+                  <div class="transmitv single-item">
+                    <form action="#" method="post">
+                      <input type="hidden" name="cmd" value="_cart" />
+                      <input type="hidden" name="add" value="1" />
+                      <input
+                        type="hidden"
+                        name="transmitv_item"
+                        value="Women Maroon Top"
+                      />
+                      <input type="hidden" name="amount" value="899.99" />
+                      <button
+                        type="submit"
+                        class="transmitv-cart ptransmitv-cart add-to-cart"
+                      >
+                        Add to Cart
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                <div class="product-content">
+                  <h3 class="title">
+                    <a href="#">{{favorite.product.product_name}}</a>
+                  </h3>
+                  <h3 class="title"><a href="#">Vendor name </a></h3>
+                  <ul class="rating">
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="fa fa-star"></li>
+                    <li class="far fa-star"></li>
+                  </ul>
+                  <div class="price">
+                    {{favorite.product.price}} 
+                    {% if favorite.product.discount_price != 0 %}
+                    <span>{{favorite.product.discount_price}}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% endfor %} {% else %}
+            <div
+              style="width: 100%; margin: 20px 0px 100px 0px"
+              class="d-flex justify-content-center"
+            >
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+
+            {% endif %}
+          </div>
+          <!-- //row-->
+        </div>
+      </div>
+      <!--//row1-->
+    </div>
+  </div>
+  <!--//mag-content-->
+</section>
+
+<section class="women-banner spad">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="filter-control pt-0">
+          <ul>
+            <li class="active">HAVE YOU SEEN THESE?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slider-2">
+  <ul id="autoWidth-2" class="cs-hidden">
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{% static 'home/product/m.jpg' %} " />
+          </a>
+          <ul class="social">
+            <li>
+              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Wishlist"
+                ><i class="fa fa-heart"></i
+              ></a>
+            </li>
+            <li>
+              <a href="" data-tip="Add to Cart"
+                ><i class="fa fa-shopping-cart"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a href="#">Product name </a></h3>
+          <h3 class="title"><a href="#">Vendor name </a></h3>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+          </ul>
+          <div class="price">$100</div>
+        </div>
+      </div>
+    </div>
+  </ul>
+</section>
+
+{% endblock content %} 
+{% block js %} 
+{% if not user.is_authenticated %}
+
+<script>
+  let productWrap = document.getElementById("fav-prod-wrapper");
+  const data = { favIds: localStorage.getItem("favorites") };
+  console.log(data);
+
+  fetch("http://127.0.0.1:8000/api/favorites-loggedout/", {
+    method: "POST", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      product = JSON.parse(data.favItems);
+      productWrapInside = "";
+      product.map((product) => {
+        productWrapInside += `
+            
+
+                <div id="${
+                  product.id
+                }" class="col-lg-2 col-6 product-incfhny mb-4">
+                    <div class="product-grid2 transmitv">
+                        <div class="product-image2">
+                            <a href="ecommerce-single.html">
+                                <img style="height:230px; width:177px" class="pic-1 img-fluid" src="${
+                                  product.image_url == ""
+                                    ? "/media/" + product.image
+                                    : product.image_url
+                                }
+                                ">
+                                <img style="height:230px; width:177px"  class="pic-2 img-fluid" src="
+                                ${
+                                  product.image_url == ""
+                                    ? "/media/" + product.image
+                                    : product.image_url
+                                }
+                                ">
+                            </a>
+                            <ul class="social">
+                                
+                                <li><a onclick="removeFromLocalFav(this, ${product.id})"  style="background-color:#ca9455; cursor:pointer;" ><span  style="color:white;" class="fa fa-heart"></span></a>
+                                </li>
+                                
+                                <li><a href="#" data-tip="Quick View"><span
+                                            class="fa fa-eye"></span></a>
+                                </li>
+
+                                <li><a href="ecommerce.html" data-tip="Add to Cart"><span
+                                            class="fa fa-shopping-bag"></span></a>
+                                </li>
+                            </ul>
+                            <div class="transmitv single-item">
+                                <form action="#" method="post">
+                                    <input type="hidden" name="cmd" value="_cart">
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="transmitv_item" value="Women Maroon Top">
+                                    <input type="hidden" name="amount" value="899.99">
+                                    <button type="submit"
+                                        class="transmitv-cart ptransmitv-cart add-to-cart">
+                                        Add to Cart
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">${
+                              product.product_name
+                            }</a></h3>
+                            <h3 class="title"><a href="#">Vendor name </a></h3>
+                            <ul class="rating">
+                                <li class="fa fa-star"></li>
+                                <li class="fa fa-star"></li>
+                                <li class="fa fa-star"></li>
+                                <li class="fa fa-star"></li>
+                                <li class="far fa-star"></li>
+                            </ul>
+                            <div class="price">
+                                ${product.price}
+                                <span>
+                                ${
+                                  product.discount_price != 0
+                                    ? product.discount_price
+                                    : null
+                                }
+                                </span>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            `;
+      });
+      document.getElementById("fav-length").innerHTML = product.length;
+      document.getElementById("wishlist-count-number").innerHTML = product.length;
+      productWrap.innerHTML = productWrapInside;
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+
+  function removeFromLocalFav(e, id) {
+    console.log(id)
+    let localFav = JSON.parse(localStorage.getItem("favorites"));
+    if (localFav.includes(id)) {
+      localFav.splice(localFav.indexOf(id), 1);
+    }
+    localStorage.setItem('favorites', JSON.stringify(localFav))
+    document.getElementById(id).remove()
+    document.getElementById("fav-length").innerHTML = document.getElementById("fav-length").innerHTML - 1
+    document.getElementById("wishlist-count-number").innerHTML = document.getElementById("fav-length").innerHTML 
+
+    console.log(JSON.parse(localStorage.getItem('favorites')))
+  }
+
+</script>
+
+{% else %}
+
+<script>
+
+  function removeFromFav(e, id) {
+    const data = { product_id: id };
+
+    fetch("http://127.0.0.1:8000/api/favorites/", {
+      method: "DELETE", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+          console.log(data)
+        if (data.loggedin == false) {
+          window.location = "/login";
+        }
+        console.log(data);
+        if (data.status == true) {
+            document.getElementById(id).remove()
+            document.getElementById("fav-length").innerHTML = document.getElementById("fav-length").innerHTML - 1
+            document.getElementById("wishlist-count-number").innerHTML = document.getElementById("fav-length").innerHTML 
+
+        }
+        
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+</script>
+
+{% endif %} 
+
+{% endblock js %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %} 
+{% block title %}Join{% endblock title %} 
+{% block breadcrumb %}Join{% endblock breadcrumb %} 
+
+
+{% block content %}
+
+<div class="register-page my-4">
+      <div class="form-vertical">
+
+        <h1 class="text-center">Create Account</h1>
+        <p><a href="sign_in.html">Back to Customer Login</a></p><form method="post" action="/account/" id="RegisterForm" accept-charset="UTF-8"><input type="hidden" name="form_type" value="create_customer">
+{% csrf_token %}
+
+        <input type="hidden" name="utf8" value="✓">
+        <div class="form-input-wrapper">
+            <input class="form-input-wrapper__input" type="text" name="customer[first_name]" id="RegisterForm-FirstName" autocomplete="given-name" placeholder=" ">
+            <label class="form-input-wrapper__label" for="RegisterForm-FirstName">First Name</label>
+          </div>
+          <div class="form-input-wrapper">
+            <input class="form-input-wrapper__input" type="text" name="customer[last_name]" id="RegisterForm-LastName" autocomplete="family-name" placeholder=" ">
+            <label class="form-input-wrapper__label" for="RegisterForm-LastName">Last Name</label>
+          </div>
+          <div class="form-input-wrapper">
+            <input class="form-input-wrapper__input" type="email" name="customer[email]" id="RegisterForm-email" autocorrect="off" autocapitalize="off" autocomplete="email" placeholder=" " required="" aria-required="true">
+            <label class="form-input-wrapper__label" for="RegisterForm-email">Email</label>
+          </div>
+
+          <div class="form-input-wrapper">
+            <input class="form-input-wrapper__input" type="password" name="customer[password]" id="RegisterForm-password" required="" aria-required="true" placeholder=" ">
+            <label class="form-input-wrapper__label" for="RegisterForm-password">Password</label>
+          </div>
+
+          <div class="register-checkbox">
+            <div class="checkbox">
+              <input type="checkbox" name="customer[accepts_marketing]" checked="checked" id="RegisterForm-Newsletter"  role="checkbox">
+              <label for="RegisterForm-Newsletter">Yes! Sign me up to receive emails from souk with the latest deals, sales, and updates.</label>
+            </div>
+
+            <div class="checkbox">
+              <input type="checkbox" name="customer-tos" id="RegisterForm-TOS" aria-required="true" role="checkbox" required="">
+              <label for="RegisterForm-TOS">I agree to souk’s Terms of Service and Privacy Policy</label>
+            </div>
+          </div>
+
+          <input type="submit" value="Create Account" class="button-primary">
+        </form>
+      </div>
+</div>
+
+
+{% endblock content %}

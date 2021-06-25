@@ -1,0 +1,54 @@
+{% extends 'base.html' %} 
+{% block title %}Profile{% endblock title %} 
+{% block breadcrumb %}Profile{% endblock breadcrumb %} 
+
+
+{% block css %}
+	<style>
+		header {
+			border-bottom: 2px solid #000;
+			height: 155px;
+		}	
+		@media only screen and (max-width: 500px){
+		header {
+			height: 90px;
+		}
+		}	
+                @media only screen and (min-width: 768px) {
+.header-logo {
+    height: auto;
+}
+}	
+	</style>
+{% endblock css %}
+
+{% block content %}
+
+
+	
+	<div class="thank-you mt-lg-3" id="thank-you">
+    <div class="container text-center">
+        <h3 class="display-5 py-4 text-light">WE'VE RECEIVED YOUR ORDER</h3>
+        <p class="py-2">Thank you for shopping with souk! We are sending a confirmation email soon!</p>
+        <h4 class="py-2">Order Number: #8585</h4>
+        <h4 class="py-2">Order Date: 16/11/2020</h4>
+        <h4 class="py-2">Total: $127.58</h4>
+        <h4 class="py-2">Payment Method: Stripe</h4>
+        <h4 class="py-2">Email: roo@gmail.com</h4>
+        <div class="col-lg-12 mt-3 pb-4">
+            <div class="row">
+                <div class="col-6">
+                    <h4><a href="info.html" class="text-white">REVIEW MY<br> ORDER</a></h4>
+                </div>
+                <div class="col-6 ">
+                    <h4><a href="home.html" class="text-white">SHOP NEW <br> ARRIVALS</a></h4>
+                </div>
+            </div>
+        </div>
+	  </div>
+	</div>
+
+	<div style="height: 50px;"></div>
+
+
+{% endblock content %}

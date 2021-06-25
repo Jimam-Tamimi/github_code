@@ -1,0 +1,109 @@
+<div class="collection-layout__filters" id="collection-layout__filters">
+      <div class="collection-layout__filters-content">
+        <div class="filters-mobile-controls">
+          <h2 class="filters-mobile-controls__heading">Filters</h2>
+          <div class="filters-mobile-controls__filters-count">
+            <span>2218</span> styles
+          </div>
+          <button type="button" class="filters-mobile-controls__close">
+            <span>Close Filters</span>
+          </button>
+        </div>
+        <div class="product-filters">
+          <div class="product-filters__category">
+            <button type="button" class="product-filters__category-name" data-toggle="collapse" data-target="#size">
+              Size
+            </button>
+            <ul class="product-filters__value-list" id="size">
+              {% for size in sizes %}
+              <li class="product-filters__value-list-item">
+                <input class="product-filters__value-input" 
+                type="checkbox" id="{{size.size__id}}"
+                  data-filter="size" 
+                  value="{{size.size__id}}" />
+                <label class="product-filters__value-label" for="{{size.size__id}}">
+                    {{size.size__size}}
+                    <span class="product-filters__value-count">178</span></label>
+              </li>
+              {% endfor %}
+            </ul>
+            <!-- <button type="button" class="product-filters__show-more"><span>Show More</span></button> -->
+          </div>
+          <div class="product-filters__category">
+            <button type="button" class="product-filters__category-name" data-toggle="collapse" data-target="#colors">
+              Colors
+            </button>
+            <ul id="colors" class="product-filters__value-list">
+              {% for color in colors %}
+              <li class="product-filters__value-list-item">
+                <input class="product-filters__value-input" type="checkbox" id="{{color.color__color_code}}"
+                  data-filter="color" value="{{color.color__id}}" data-active="0" />
+                <label class="product-filters__value-label product-filters__value-label--swatch" 
+                for="{{color.color__color_code}}"> {{color.color__color}}
+                <span class="product-filters__value-swatch"
+                    style="background-color: {{color.color__color_code}}">
+                </span>
+                <span class="product-filters__value-count">{{color.color__prodcount}}</span></label>
+              </li>
+              {% endfor %}
+            </ul>
+            <!-- <button type="button" class="product-filters__show-more"><span>Show More</span></button> -->
+          </div>
+          <div class="product-filters__category">
+            <button type="button" data-toggle="collapse" data-target="#price" class="product-filters__category-name">
+              Price
+            </button>
+            <ul class="product-filters__value-list" id="price">
+              <div class="list-group list-group-flush">
+					<li class="list-group-item">
+						<input type="range" value="{{minMaxPrice.price__min}}" max={{minMaxPrice.price__max}} min={{minMaxPrice.price__min}} id="rangeInput" oninput="maxPrice.value=this.value" />
+						<p>{{minMaxPrice.price__min}}-{{minMaxPrice.price__max}}</p>
+					</li>
+					<li class="list-group-item">
+						Max: <input type="number" value="{{minMaxPrice.price__min}}" max={{minMaxPrice.price__max}} min={{minMaxPrice.price__min}} class="form-control" id="maxPrice" onkeyup="rangeInput.value=this.value" id="maxPrice" />
+						<button id="priceFilterBtn" class="btn btn-info btn-sm mt-1">Filter</button>
+					</li>
+				</div>
+            </ul>
+          </div>
+          <div class="product-filters__category product-filters__category--expanded" data-facet-key="product_type">
+            <button type="button" class="product-filters__category-name" data-toggle="collapse" data-target="#brands">
+              Brand
+            </button>
+            <ul id="brands" class="product-filters__value-list">
+             {% for brand in brands %}
+              <li class="product-filters__value-list-item">
+                <input class="product-filters__value-input" type="checkbox" id="{{brand.brand__brand_name}}"
+                  data-filter="brand" value="{{brand.brand__id}} data-active="0" />
+                <label class="product-filters__value-label" for="{{brand.brand__brand_name}}">
+                    {{brand.brand__brand_name}}
+                    <span class="product-filters__value-count">442</span></label>
+              </li>
+             {% endfor %}
+            </ul>
+            <!-- <button type="button" class="product-filters__show-more"><span>Show Less</span></button> -->
+          </div>
+          <div class="product-filters__category">
+            <button type="button" class="product-filters__category-name" data-toggle="collapse" data-target="#sale">
+              Sale
+            </button>
+            <ul class="product-filters__value-list" id="sale">
+              <li class="product-filters__value-list-item">
+                <input class="product-filters__value-input" type="checkbox" id="filter_input_uufc8xd54ii"
+                  data-facet-filter="tags:Sale" data-display-name="Sale" data-active="0" />
+                <label class="product-filters__value-label" for="filter_input_uufc8xd54ii">Sale<span
+                    class="product-filters__value-count">410</span></label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="collection-layout__filters-actions">
+        <button class="collection-layout__filters-clear" type="button">
+          Clear All
+        </button>
+        <button class="collection-layout__filters-apply" type="button">
+          Apply
+        </button>
+      </div>
+    </div>
